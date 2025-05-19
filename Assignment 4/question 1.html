@@ -1,0 +1,740 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JavaScript Fundamentals Assignment</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f5f5f5;
+        }
+        
+        h1, h2, h3 {
+            color: #2c3e50;
+        }
+        
+        section {
+            background-color: white;
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 30px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        
+        .container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+        
+        .box {
+            flex: 1;
+            min-width: 300px;
+            padding: 15px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+        
+        button, input[type="submit"] {
+            background-color: #3498db;
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            border-radius: 4px;
+            cursor: pointer;
+            margin: 5px 0;
+        }
+        
+        button:hover, input[type="submit"]:hover {
+            background-color: #2980b9;
+        }
+        
+        input, select {
+            padding: 8px;
+            margin: 5px 0;
+            width: 100%;
+            box-sizing: border-box;
+        }
+        
+        .error {
+            color: #e74c3c;
+            font-size: 0.9em;
+            margin-top: -5px;
+            margin-bottom: 10px;
+        }
+        
+        .success {
+            color: #27ae60;
+        }
+        
+        #todo-list {
+            list-style-type: none;
+            padding: 0;
+        }
+        
+        #todo-list li {
+            padding: 10px;
+            background-color: #f9f9f9;
+            margin-bottom: 5px;
+            border-radius: 4px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        #todo-list li.completed {
+            text-decoration: line-through;
+            opacity: 0.7;
+        }
+        
+        #chat-container {
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            height: 300px;
+            overflow-y: auto;
+            padding: 10px;
+            margin-bottom: 10px;
+            background-color: #f9f9f9;
+        }
+        
+        .chat-message {
+            margin-bottom: 10px;
+            padding: 8px;
+            border-radius: 4px;
+            max-width: 80%;
+        }
+        
+        .user-message {
+            background-color: #3498db;
+            color: white;
+            margin-left: auto;
+        }
+        
+        .bot-message {
+            background-color: #ecf0f1;
+            margin-right: auto;
+        }
+        
+        #dynamic-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 10px;
+        }
+        
+        #dynamic-table th, #dynamic-table td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+        
+        #dynamic-table th {
+            background-color: #f2f2f2;
+        }
+        
+        .hover-box {
+            width: 200px;
+            height: 200px;
+            background-color: #3498db;
+            color: white;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            transition: all 0.3s ease;
+        }
+    </style>
+</head>
+<body>
+    <h1>JavaScript Fundamentals Assignment</h1>
+    
+    <!-- Section 1: Variables, Functions, Conditions, and Loops -->
+    <section id="section1">
+        <h2>1. Variables, Functions, Conditions, and Loops</h2>
+        
+        <div class="container">
+            <!-- BMI Calculator -->
+            <div class="box">
+                <h3>BMI Calculator</h3>
+                <label for="weight">Weight (kg):</label>
+                <input type="number" id="weight" placeholder="Enter weight">
+                
+                <label for="height">Height (m):</label>
+                <input type="number" id="height" placeholder="Enter height" step="0.01">
+                
+                <button onclick="calculateBMI()">Calculate BMI</button>
+                
+                <p id="bmi-result"></p>
+            </div>
+            
+            <!-- Temperature Converter -->
+            <div class="box">
+                <h3>Temperature Converter</h3>
+                <label for="temp">Temperature:</label>
+                <input type="number" id="temp" placeholder="Enter temperature">
+                
+                <select id="conversion-type">
+                    <option value="c-to-f">Celsius to Fahrenheit</option>
+                    <option value="f-to-c">Fahrenheit to Celsius</option>
+                </select>
+                
+                <button onclick="convertTemperature()">Convert</button>
+                
+                <p id="temp-result"></p>
+            </div>
+            
+            <!-- Dynamic Table with Loops -->
+            <div class="box">
+                <h3>Dynamic Table</h3>
+                <label for="table-rows">Number of Rows:</label>
+                <input type="number" id="table-rows" min="1" max="20" value="5">
+                
+                <button onclick="generateTable()">Generate Table</button>
+                
+                <table id="dynamic-table"></table>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Section 2: Pop-up Boxes -->
+    <section id="section2">
+        <h2>2. Pop-up Boxes</h2>
+        
+        <div class="container">
+            <div class="box">
+                <h3>Alert Box</h3>
+                <button onclick="showAlert()">Show Alert</button>
+            </div>
+            
+            <div class="box">
+                <h3>Confirmation Box</h3>
+                <button onclick="showConfirmation()">Delete Item</button>
+                <p id="confirmation-result"></p>
+            </div>
+            
+            <div class="box">
+                <h3>Prompt Box</h3>
+                <button onclick="showPrompt()">Ask for Name</button>
+                <p id="prompt-result"></p>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Section 3: Event Handling & DOM Manipulation -->
+    <section id="section3">
+        <h2>3. Event Handling & DOM Manipulation</h2>
+        
+        <div class="container">
+            <div class="box">
+                <h3>Change Content</h3>
+                <p id="change-text">Original Text</p>
+                <button onclick="changeText()">Change Text</button>
+                <button onclick="changeStyle()">Change Style</button>
+                <button onclick="changeImage()">Change Image</button>
+                <img id="changeable-image" src="https://via.placeholder.com/150" alt="Placeholder">
+            </div>
+            
+            <div class="box">
+                <h3>Hover Effects</h3>
+                <div class="hover-box" id="hover-box" 
+                     onmouseover="hoverEffect('enter')" 
+                     onmouseout="hoverEffect('exit')">
+                    Hover Over Me
+                </div>
+            </div>
+            
+            <div class="box">
+                <h3>Dynamic List</h3>
+                <input type="text" id="new-item" placeholder="Enter item">
+                <button onclick="addItem()">Add Item</button>
+                <ul id="item-list"></ul>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Section 4: Forms & Validation -->
+    <section id="section4">
+        <h2>4. Forms & Validation</h2>
+        
+        <form id="registration-form" onsubmit="validateForm(event)">
+            <div class="container">
+                <div class="box">
+                    <h3>Registration Form</h3>
+                    
+                    <label for="name">Full Name:</label>
+                    <input type="text" id="name" placeholder="Enter your name">
+                    <div id="name-error" class="error"></div>
+                    
+                    <label for="email">Email:</label>
+                    <input type="text" id="email" placeholder="Enter your email">
+                    <div id="email-error" class="error"></div>
+                    
+                    <label for="phone">Phone Number:</label>
+                    <input type="text" id="phone" placeholder="Enter your phone">
+                    <div id="phone-error" class="error"></div>
+                    
+                    <label for="password">Password:</label>
+                    <input type="password" id="password" placeholder="Enter password">
+                    <div id="password-error" class="error"></div>
+                    
+                    <input type="submit" value="Register">
+                    <p id="form-result"></p>
+                </div>
+                
+                <div class="box">
+                    <h3>Validation Rules</h3>
+                    <ul>
+                        <li>Name must be at least 3 characters</li>
+                        <li>Email must be valid format</li>
+                        <li>Phone must be 10 digits</li>
+                        <li>Password must contain:
+                            <ul>
+                                <li>At least 8 characters</li>
+                                <li>One uppercase letter</li>
+                                <li>One lowercase letter</li>
+                                <li>One number</li>
+                                <li>One special character</li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </form>
+    </section>
+    
+    <!-- Section 5: JavaScript Standard Objects & AJAX -->
+    <section id="section5">
+        <h2>5. JavaScript Objects & AJAX</h2>
+        
+        <div class="container">
+            <div class="box">
+                <h3>Date Object</h3>
+                <button onclick="showCurrentDate()">Show Current Date & Time</button>
+                <p id="date-result"></p>
+            </div>
+            
+            <div class="box">
+                <h3>Math Object</h3>
+                <button onclick="generateRandomNumber()">Generate Random Number (1-100)</button>
+                <p id="random-result"></p>
+            </div>
+            
+            <div class="box">
+                <h3>AJAX - Weather Data</h3>
+                <p>Fetch weather data for a random city</p>
+                <button onclick="fetchWeather()">Get Weather</button>
+                <div id="weather-result"></div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Advanced Section: To-Do List -->
+    <section id="todo-section">
+        <h2>To-Do List App</h2>
+        
+        <div class="container">
+            <div class="box">
+                <h3>Add New Task</h3>
+                <input type="text" id="todo-input" placeholder="Enter task">
+                <button onclick="addTodo()">Add Task</button>
+            </div>
+            
+            <div class="box">
+                <h3>Your Tasks</h3>
+                <ul id="todo-list"></ul>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Advanced Section: Simple Chatbot -->
+    <section id="chatbot-section">
+        <h2>Simple Chatbot</h2>
+        
+        <div id="chat-container"></div>
+        <input type="text" id="user-input" placeholder="Type your message...">
+        <button onclick="sendMessage()">Send</button>
+    </section>
+
+    <script>
+        // Section 1: Variables, Functions, Conditions, and Loops
+        
+        // BMI Calculator
+        function calculateBMI() {
+            const weight = parseFloat(document.getElementById('weight').value);
+            const height = parseFloat(document.getElementById('height').value);
+            
+            if (isNaN(weight) || isNaN(height) || height <= 0) {
+                alert("Please enter valid weight and height");
+                return;
+            }
+            
+            const bmi = weight / (height * height);
+            let category;
+            
+            if (bmi < 18.5) {
+                category = "Underweight";
+            } else if (bmi < 25) {
+                category = "Normal weight";
+            } else if (bmi < 30) {
+                category = "Overweight";
+            } else {
+                category = "Obese";
+            }
+            
+            document.getElementById('bmi-result').innerHTML = 
+                `Your BMI is ${bmi.toFixed(1)} (${category})`;
+        }
+        
+        // Temperature Converter
+        function convertTemperature() {
+            const temp = parseFloat(document.getElementById('temp').value);
+            const conversionType = document.getElementById('conversion-type').value;
+            let result;
+            
+            if (isNaN(temp)) {
+                alert("Please enter a valid temperature");
+                return;
+            }
+            
+            if (conversionType === "c-to-f") {
+                result = (temp * 9/5) + 32;
+                document.getElementById('temp-result').innerHTML = 
+                    `${temp}°C = ${result.toFixed(1)}°F`;
+            } else {
+                result = (temp - 32) * 5/9;
+                document.getElementById('temp-result').innerHTML = 
+                    `${temp}°F = ${result.toFixed(1)}°C`;
+            }
+        }
+        
+        // Dynamic Table Generator
+        function generateTable() {
+            const rows = parseInt(document.getElementById('table-rows').value);
+            const table = document.getElementById('dynamic-table');
+            
+            // Clear existing table
+            table.innerHTML = "";
+            
+            // Create header
+            const header = table.createTHead();
+            const headerRow = header.insertRow();
+            headerRow.insertCell().textContent = "ID";
+            headerRow.insertCell().textContent = "Name";
+            headerRow.insertCell().textContent = "Age";
+            headerRow.insertCell().textContent = "Occupation";
+            
+            // Create body
+            const body = table.createTBody();
+            
+            // Sample data
+            const names = ["Alice", "Bob", "Charlie", "David", "Eve"];
+            const occupations = ["Engineer", "Doctor", "Teacher", "Artist", "Developer"];
+            
+            for (let i = 1; i <= rows; i++) {
+                const row = body.insertRow();
+                row.insertCell().textContent = i;
+                row.insertCell().textContent = names[Math.floor(Math.random() * names.length)];
+                row.insertCell().textContent = Math.floor(Math.random() * 30) + 20;
+                row.insertCell().textContent = occupations[Math.floor(Math.random() * occupations.length)];
+            }
+        }
+        
+        // Section 2: Pop-up Boxes
+        
+        function showAlert() {
+            alert("This is an alert box!\nIt displays an important message to the user.");
+        }
+        
+        function showConfirmation() {
+            const result = confirm("Are you sure you want to delete this item?");
+            document.getElementById('confirmation-result').textContent = 
+                result ? "Item deleted!" : "Deletion canceled.";
+        }
+        
+        function showPrompt() {
+            const name = prompt("Please enter your name:", "John Doe");
+            if (name !== null) {
+                document.getElementById('prompt-result').textContent = 
+                    `Hello, ${name}! Welcome to our website.`;
+            } else {
+                document.getElementById('prompt-result').textContent = 
+                    "You didn't enter your name.";
+            }
+        }
+        
+        // Section 3: Event Handling & DOM Manipulation
+        
+        function changeText() {
+            document.getElementById('change-text').textContent = 
+                "Text changed by JavaScript!";
+        }
+        
+        function changeStyle() {
+            const text = document.getElementById('change-text');
+            text.style.color = "#e74c3c";
+            text.style.fontWeight = "bold";
+            text.style.fontSize = "1.2em";
+        }
+        
+        function changeImage() {
+            const img = document.getElementById('changeable-image');
+            img.src = img.src.includes("placeholder") ? 
+                "https://via.placeholder.com/150/3498db/ffffff" : 
+                "https://via.placeholder.com/150";
+        }
+        
+        function hoverEffect(type) {
+            const box = document.getElementById('hover-box');
+            if (type === 'enter') {
+                box.style.backgroundColor = "#e74c3c";
+                box.textContent = "Mouse Entered!";
+            } else {
+                box.style.backgroundColor = "#3498db";
+                box.textContent = "Hover Over Me";
+            }
+        }
+        
+        function addItem() {
+            const input = document.getElementById('new-item');
+            const itemText = input.value.trim();
+            
+            if (itemText === "") {
+                alert("Please enter an item");
+                return;
+            }
+            
+            const list = document.getElementById('item-list');
+            const li = document.createElement('li');
+            li.textContent = itemText;
+            
+            const deleteBtn = document.createElement('button');
+            deleteBtn.textContent = "Delete";
+            deleteBtn.onclick = function() {
+                list.removeChild(li);
+            };
+            
+            li.appendChild(deleteBtn);
+            list.appendChild(li);
+            input.value = "";
+        }
+        
+        // Section 4: Forms & Validation
+        
+        function validateForm(event) {
+            event.preventDefault();
+            
+            // Get form values
+            const name = document.getElementById('name').value.trim();
+            const email = document.getElementById('email').value.trim();
+            const phone = document.getElementById('phone').value.trim();
+            const password = document.getElementById('password').value;
+            
+            // Reset error messages
+            document.getElementById('name-error').textContent = "";
+            document.getElementById('email-error').textContent = "";
+            document.getElementById('phone-error').textContent = "";
+            document.getElementById('password-error').textContent = "";
+            
+            // Validate name
+            if (name.length < 3) {
+                document.getElementById('name-error').textContent = 
+                    "Name must be at least 3 characters";
+                return;
+            }
+            
+            // Validate email with regex
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            if (!emailRegex.test(email)) {
+                document.getElementById('email-error').textContent = 
+                    "Please enter a valid email address";
+                return;
+            }
+            
+            // Validate phone with regex
+            const phoneRegex = /^\d{10}$/;
+            if (!phoneRegex.test(phone)) {
+                document.getElementById('phone-error').textContent = 
+                    "Phone must be 10 digits";
+                return;
+            }
+            
+            // Validate password with regex
+            const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
+            if (!passwordRegex.test(password)) {
+                document.getElementById('password-error').textContent = 
+                    "Password must contain at least 8 characters, one uppercase, one lowercase, one number and one special character";
+                return;
+            }
+            
+            // If all validations pass
+            document.getElementById('form-result').textContent = 
+                "Registration successful!";
+            document.getElementById('form-result').className = "success";
+            
+            // Reset form
+            document.getElementById('registration-form').reset();
+        }
+        
+        // Section 5: JavaScript Standard Objects & AJAX
+        
+        function showCurrentDate() {
+            const now = new Date();
+            document.getElementById('date-result').textContent = 
+                `Current date and time: ${now.toLocaleString()}`;
+        }
+        
+        function generateRandomNumber() {
+            const randomNum = Math.floor(Math.random() * 100) + 1;
+            document.getElementById('random-result').textContent = 
+                `Random number: ${randomNum}`;
+        }
+        
+        function fetchWeather() {
+            const cities = ["London", "New York", "Tokyo", "Paris", "Sydney"];
+            const randomCity = cities[Math.floor(Math.random() * cities.length)];
+            
+            // Note: In a real application, you would use a real API key
+            // This is a mock implementation for demonstration
+            const weatherResult = document.getElementById('weather-result');
+            weatherResult.innerHTML = "<p>Fetching weather data...</p>";
+            
+            // Simulate API call with setTimeout
+            setTimeout(() => {
+                const weatherData = {
+                    city: randomCity,
+                    temperature: Math.floor(Math.random() * 30) - 5, // -5 to 25
+                    conditions: ["Sunny", "Cloudy", "Rainy", "Snowy"][Math.floor(Math.random() * 4)],
+                    humidity: Math.floor(Math.random() * 50) + 50 // 50-100
+                };
+                
+                weatherResult.innerHTML = `
+                    <h4>Weather in ${weatherData.city}</h4>
+                    <p>Temperature: ${weatherData.temperature}°C</p>
+                    <p>Conditions: ${weatherData.conditions}</p>
+                    <p>Humidity: ${weatherData.humidity}%</p>
+                `;
+            }, 1500);
+        }
+        
+        // Advanced: To-Do List App
+        
+        function addTodo() {
+            const input = document.getElementById('todo-input');
+            const text = input.value.trim();
+            
+            if (text === "") {
+                alert("Please enter a task");
+                return;
+            }
+            
+            const list = document.getElementById('todo-list');
+            const li = document.createElement('li');
+            
+            const checkbox = document.createElement('input');
+            checkbox.type = "checkbox";
+            checkbox.onchange = function() {
+                li.classList.toggle('completed');
+            };
+            
+            const span = document.createElement('span');
+            span.textContent = text;
+            
+            const deleteBtn = document.createElement('button');
+            deleteBtn.textContent = "Delete";
+            deleteBtn.onclick = function() {
+                list.removeChild(li);
+            };
+            
+            li.appendChild(checkbox);
+            li.appendChild(span);
+            li.appendChild(deleteBtn);
+            list.appendChild(li);
+            
+            input.value = "";
+        }
+        
+        // Advanced: Simple Chatbot
+        
+        function sendMessage() {
+            const input = document.getElementById('user-input');
+            const message = input.value.trim();
+            
+            if (message === "") return;
+            
+            const chatContainer = document.getElementById('chat-container');
+            
+            // Add user message
+            const userMessage = document.createElement('div');
+            userMessage.className = "chat-message user-message";
+            userMessage.textContent = message;
+            chatContainer.appendChild(userMessage);
+            
+            // Clear input
+            input.value = "";
+            
+            // Scroll to bottom
+            chatContainer.scrollTop = chatContainer.scrollHeight;
+            
+            // Bot response (simulated)
+            setTimeout(() => {
+                const botResponse = getBotResponse(message);
+                const botMessage = document.createElement('div');
+                botMessage.className = "chat-message bot-message";
+                botMessage.textContent = botResponse;
+                chatContainer.appendChild(botMessage);
+                chatContainer.scrollTop = chatContainer.scrollHeight;
+            }, 1000);
+        }
+        
+        function getBotResponse(message) {
+            message = message.toLowerCase();
+            
+            if (message.includes("hello") || message.includes("hi")) {
+                return "Hello there! How can I help you today?";
+            } else if (message.includes("how are you")) {
+                return "I'm just a bot, but I'm functioning well! How about you?";
+            } else if (message.includes("bye") || message.includes("goodbye")) {
+                return "Goodbye! Have a great day!";
+            } else if (message.includes("weather")) {
+                return "I can check the weather for you. Try clicking the 'Get Weather' button above!";
+            } else if (message.includes("time") || message.includes("date")) {
+                return "Check the current date and time in the JavaScript Objects section above!";
+            } else {
+                const responses = [
+                    "That's interesting. Tell me more.",
+                    "I'm not sure I understand. Could you rephrase that?",
+                    "I'm a simple bot and my knowledge is limited.",
+                    "Thanks for sharing that with me!",
+                    "I'll make a note of that."
+                ];
+                return responses[Math.floor(Math.random() * responses.length)];
+            }
+        }
+        
+        // Initialize with some todos
+        window.onload = function() {
+            const initialTodos = [
+                "Complete JavaScript assignment",
+                "Learn about DOM manipulation",
+                "Practice event handling",
+                "Build a small project"
+            ];
+            
+            initialTodos.forEach(todo => {
+                document.getElementById('todo-input').value = todo;
+                addTodo();
+            });
+            
+            // Add welcome message to chat
+            const chatContainer = document.getElementById('chat-container');
+            const welcomeMessage = document.createElement('div');
+            welcomeMessage.className = "chat-message bot-message";
+            welcomeMessage.textContent = "Hello! I'm a simple chatbot. Try saying 'hi' or ask me a question.";
+            chatContainer.appendChild(welcomeMessage);
+        };
+    </script>
+</body>
+</html>
